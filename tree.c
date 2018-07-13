@@ -339,7 +339,6 @@ void createTree(TREE* tree, TRAINING* head)
 
 //分类函数
 int classify(TREE* tree, TRAINING* head)
-<<<<<<< HEAD
 {
     if((*tree)->attribute == CAN_PLAY || (*tree)->attribute == NOT_PLAY)
         return (*tree)->attribute;
@@ -381,83 +380,3 @@ int classify(TREE* tree, TRAINING* head)
     }
 }
 
-
-=======
-{
-    if((*tree)->attribute == CAN_PLAY || (*tree)->attribute == NOT_PLAY)
-        return (*tree)->attribute;
-    else
-    {
-        int attributes = (*tree)->attribute;
-        if(attributes == OUTLOOK)
-        {
-            switch(head->outLook)       
-            {
-                case SUNNY: classify(&((*tree)->left), head);
-                            break;
-                case RAIN:  classify(&((*tree)->mid), head);
-                            break;
-                case VOERCAST: classify(&((*tree)->right), head);
-                            break;
-            }
-        }
-        if(attributes == TEMPERATURE)
-        {
-            switch(head->humidity)       
-            {
-                case HIGH_HUMIDITY: classify(&((*tree)->left), head);
-                                    break;
-                case NORMAL_HUMIDITY: classify(&((*tree)->right), head);
-                                    break;
-            }
-        }
-        if(attributes == WINDY)
-        {
-            switch(head->windy)       
-            {
-                case WIND: classify(&((*tree)->left), head);
-                           break;
-                case NO_WIND: classify(&((*tree)->right), head);
-                              break;
-            }
-        }
-    }
-}
-
-
-int main()
-{
- TRAINING trainingSet[TRAINING_NUMBER] =
-{
-{ SUNNY   , HIGH_TEMPERATURE, HIGH_HUMIDITY,   NO_WIND, NOT_PLAY, NULL },
-{ SUNNY   , HIGH_TEMPERATURE, HIGH_HUMIDITY,   WIND ,   NOT_PLAY, NULL },
-{ VOERCAST, HIGH_TEMPERATURE, HIGH_HUMIDITY,   NO_WIND, CAN_PLAY, NULL },
-{ RAIN    , MID_TEMPERATURE,  HIGH_HUMIDITY,   NO_WIND, CAN_PLAY, NULL },
-{ RAIN    , COLD_TEMPERATURE, NORMAL_HUMIDITY, NO_WIND, CAN_PLAY, NULL },
-{ RAIN    , COLD_TEMPERATURE, NORMAL_HUMIDITY, WIND ,   NOT_PLAY, NULL },
-{ VOERCAST, COLD_TEMPERATURE, NORMAL_HUMIDITY, WIND ,   CAN_PLAY, NULL },
-{ SUNNY   , MID_TEMPERATURE,  HIGH_HUMIDITY,   NO_WIND, NOT_PLAY, NULL },
-{ SUNNY   , COLD_TEMPERATURE, NORMAL_HUMIDITY, NO_WIND, CAN_PLAY, NULL },
-{ RAIN    , MID_TEMPERATURE,  NORMAL_HUMIDITY, NO_WIND, CAN_PLAY, NULL },
-{ SUNNY   , MID_TEMPERATURE,  NORMAL_HUMIDITY, WIND ,   CAN_PLAY, NULL },
-{ VOERCAST, MID_TEMPERATURE,  HIGH_HUMIDITY,   WIND ,   CAN_PLAY, NULL },
-{ VOERCAST, HIGH_TEMPERATURE, NORMAL_HUMIDITY, NO_WIND, CAN_PLAY, NULL },
-{ RAIN    , MID_TEMPERATURE,  HIGH_HUMIDITY,   WIND ,   NOT_PLAY, NULL }
-};
- TRAINING* head =  trainingInit(trainingSet);
- TREE* t = (TREE*)malloc(sizeof(TREENODE));
- createTree(t, head);
- for(int i = 0; i < 14; i++)
- {
-     printf("%s\n", classify(t, head)-14?"NOT_PLAY":"CAN_PLAY");
-     head = head->next;
- }//TRAINING* sub = splitData(TEMPERATURE,HIGH_TEMPERATURE, head);
- //sub = splitData(OUTLOOK,SUNNY, sub); 
- //double a = calEntropy(head);
- //printf("信息熵为%f\n", a);
- //printf("最好的划分为%d\n", choseBestFeature(sub));
-
- return 0;
-}
-
->>>>>>> 42fdf2659efdcb674df64eb7c266b3975c51dc22

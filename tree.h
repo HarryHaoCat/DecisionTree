@@ -74,6 +74,8 @@ int choseBestFeature(TRAINING* p);
 void createTree(TREE* tree, TRAINING* head);
 //分类函数
 int classify(TREE* tree, TRAINING* head);
+//打印决策树
+void printTree(TREE* tree, int location);
 #endif
 
 
